@@ -1,0 +1,37 @@
+<h1 class="mt-3">Search Devices</h1>
+
+<%= form_with url: "/search", method: :get do |form| %>
+
+  <div class="mt-3">
+    <%= form.label :query, "Search for:", :class => "form-label" %>
+    <%= form.text_field :query, :value => @query, :class => "form-control" %>
+  </div>
+
+  <div class="mt-3">
+    <%= form.label :category_id, "Category:", :class => "form-label" %>
+    <%= form.select :category_id, Category.all.map { |c| [c.name, c.id] },
+      { :selected => @category_id, :include_blank => true },
+      { :class => "form-select" } %>
+  </div>
+
+  <div class="mt-3">
+    <%= form.label :manufacturer_id, "Manufacturer:", :class => "form-label" %>
+    <%= form.select :manufacturer_id, Manufacturer.all.map { |m| [m.name, m.id] },
+      { :selected => @manufacturer_id, :include_blank => true },
+      { :class => "form-select" } %>
+  </div>
+  
+  <div class="mt-3">
+    <%= form.submit "Search", :class => "btn btn-outline-primary" %>
+  </div>
+<% end %>
+
+<h2 class="mt-3">Results</h2>
+
+<% if @devices.present? %>
+  <ul>
+    <% @devices.each do |d| %>
+      <li><%=link_to "#{d.name} (#{d.manufacturer.name}/#{d.category.name})", device_path(d) %></li>
+    <% end %>
+  </ul>
+<% end %>

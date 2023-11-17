@@ -1,0 +1,7 @@
+
+<%= simple_form_for([@project, @task]) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :due_date %>
+  <%= f.input :complete %>
+  <%= f.submit :class => "btn btn-primary" %>
+<% end %>
