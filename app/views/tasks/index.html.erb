@@ -27,6 +27,8 @@
           <td><%= t.due_date < Date.today && !t.complete %></td>
         <% if t.complete %>
           <td><span class="badge" style="background-color: green">Complete</span></td>
+        <% elsif t.due_date < Date.today && !t.complete %>
+          <td><span class="badge" style="background-color: red">Overdue</span></td>
         <% else %>
           <td></td>
         <% end %>
